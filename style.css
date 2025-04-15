@@ -1,0 +1,50 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f9f9f9;
+  color: #333;
+}
+
+header {
+  background: #333;
+  color: white;
+  padding: 2em;
+  text-align: center;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  background: #444;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  margin: 0 1em;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 1em;
+  display: block;
+}
+
+section {
+  padding: 2em;
+}
+
+.projects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1em;
+}
+
+.project {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 1em;
+}
