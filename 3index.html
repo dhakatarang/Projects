@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Catch the Box Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      background: #f0f0f0;
+    }
+    #gameArea {
+      position: relative;
+      width: 600px;
+      height: 400px;
+      margin: 50px auto;
+      border: 2px solid #333;
+      background: #fff;
+    }
+    #box {
+      width: 50px;
+      height: 50px;
+      background: crimson;
+      position: absolute;
+      cursor: pointer;
+    }
+    #scoreboard {
+      margin-top: 20px;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Catch the Box!</h1>
+<div id="gameArea">
+  <div id="box"></div>
+</div>
+<div id="scoreboard">
+  Score: <span id="score">0</span> | Time: <span id="time">30</span>s
+</div>
+
+<script>
+  const box = document.getElementById("box");
+  const gameArea = document.getElementById("gameArea");
+  const scoreDisplay = document.getElementById("score");
+  const timeDisplay = document.getElementById("time");
+
+  let score = 0;
+  let timeLeft = 30;
+  let gameInterval;
+  let moveBoxInterval;
+
+  function getRandomPosition() {
+    const x = Math.random() * (gameArea.clientWidth - box.clientWidth);
+    const y = Math.random() * (gameArea.clientHeight - box.clientHeight);
+    return { x, y };
+  }
+
+  function moveBox() {
+    const { x, y } = getRandomPosition();
+    box.style.left = x + "px";
+    box.style.top = y + "px";
+  }
+
+  box.addEventListener("click", () => {
+    if (timeLeft > 0) {
+      score++;
+      scoreDisplay.textContent = score;
+      moveBox();
+    }
+  });
+
+  function startGame() {
+    moveBox();
+    moveBoxInterval = setInterval(moveBox, 1000);
+
+    gameInterval = setInterval(() => {
+      timeLeft--;
+      timeDisplay.textContent = timeLeft;
+
+      if (timeLeft === 0) {
+        clearInterval(gameInterval);
+        clearInterval(moveBoxInterval);
+        alert("Time's up! Your score: " + score);
+      }
+    }, 1000);
+  }
+
+  startGame();
+</script>
+
+</body>
+</html>
